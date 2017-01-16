@@ -1,12 +1,11 @@
 #ifndef STATE_BASE_H_INCLUDED
 #define STATE_BASE_H_INCLUDED
 
-class Application;
+#include <SFML/Graphics.hpp>
 
-namespace sf
-{
-    class Event;
-}
+#include "../Resource_Manager.h"
+
+class Application;
 
 namespace State
 {
@@ -20,6 +19,11 @@ namespace State
             virtual void input  ()                      = 0;
             virtual void update (float dt)              = 0;
             virtual void draw   ()                      = 0;
+
+        protected:
+            const sf::Texture&      getTexture (Texture_ID id) const;
+            const sf::Font&         getFont    (Font_ID    id) const;
+            const sf::SoundBuffer&  getSound   (Sound_ID   id) const;
 
         protected:
             Application* m_p_application;

@@ -1,9 +1,33 @@
 #include "Application.h"
 
+#include <iostream>
+
 #include "Display.h"
 #include "Util/Random.h"
 
 #include "States/Splash_Screen.h"
+
+namespace
+{
+    void calculateFPS()
+    {
+        static sf::Clock timer;
+        static sf::Clock printTimer;
+        static auto numFrames = 0;
+
+        numFrames++;
+
+        if (printTimer.getElapsedTime().asSeconds() >= 1.0f)
+        {
+            auto fps = (float)numFrames / timer.getElapsedTime().asSeconds();
+            printTimer.restart();
+            std::cout << fps << std::endl;
+
+            numFrames = 0;
+            timer.restart();
+}
+    }
+}
 
 Application::Application()
 {
@@ -29,6 +53,7 @@ void Application::runMainLoop()
         m_states.top()->draw    ();
 
         Display::update         ();
+        calculateFPS            ();
     }
 }
 

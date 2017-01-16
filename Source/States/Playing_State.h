@@ -3,6 +3,8 @@
 
 #include "State_Base.h"
 
+#include "../Animation.h"
+
 namespace State
 {
     class Playing : public State_Base
@@ -16,7 +18,9 @@ namespace State
             void draw   ();
 
         private:
-
+            sf::RectangleShape  m_animSprite;
+            Animation           m_anim;
+            sf::Text            m_text;
     };
 }
 

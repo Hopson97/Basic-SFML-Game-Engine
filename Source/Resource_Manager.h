@@ -10,12 +10,14 @@
 enum class Texture_ID
 {
     Splash_SFML,
-    Splash_MH
+    Splash_MH,
+
+    Arrow_Test,
 };
 
 enum class Font_ID
 {
-
+    RS
 };
 
 enum class Sound_ID

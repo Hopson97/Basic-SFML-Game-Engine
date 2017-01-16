@@ -6,11 +6,14 @@ Texture_Manager::Texture_Manager()
 
     registerResource(Texture_ID::Splash_SFML, path + "Splash/SFML.png");
     registerResource(Texture_ID::Splash_MH,   path + "Splash/MatthewHopson.png");
+    registerResource(Texture_ID::Arrow_Test,   path + "Arrows.png");
 }
 
 Font_Manager::Font_Manager()
 {
     std::string path ("Res/Fonts/");
+
+    registerResource(Font_ID::RS, path + "rs.ttf");
 }
 
 Sound_Manager::Sound_Manager()
