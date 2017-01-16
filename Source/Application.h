@@ -7,6 +7,12 @@
 #include "Resource_Manager.h"
 #include "States/State_Base.h"
 
+//Cheeky defines to avoid longlineitus
+#define GET_RES m_p_application->getResources()
+
+#define GET_APP_TEXTURE(id) GET_RES.textures.  get(id)
+#define GET_APP_FONT(id)    GET_RES.fonts.     get(id)
+
 class Application
 {
     public:
@@ -14,7 +20,7 @@ class Application
 
         void runMainLoop();
 
-        const Resource_Holder getResources();
+        const Resource_Holder& getResources() const;
 
         void pushState(std::unique_ptr<State::State_Base> state);
         void popState ();

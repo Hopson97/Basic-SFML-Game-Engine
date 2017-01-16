@@ -2,11 +2,13 @@
 #define RESOURCEMANAGER_H_INCLUDED
 
 #include <map>
+#include <stdexcept>
+
 #include <SFML/Graphics.hpp>
 
 enum class Texture_ID
 {
-
+    Splash_SFML
 };
 
 enum class Font_ID
@@ -21,13 +23,18 @@ class Resource_Manager
     public:
         const Resource& get(Enum e) const
         {
-            return m_resources[e];
+            return m_resources.at(e);
         }
 
     protected:
-        void registerResource(Enum key, const Resource& resource)
+        void registerResource(Enum key, const std::string& filename)
         {
-            m_resources.insert(std::make_pair(key, resource));
+            Resource res;
+            if (!res.loadFromFile(filename))
+            {
+                throw std::runtime_error ("Could load resource: " + filename + "!");
+            }
+            m_resources.insert(std::make_pair(key, res));
         }
 
     private:
@@ -48,8 +55,8 @@ class Font_Manager : public Resource_Manager<sf::Font, Font_ID>
 
 struct Resource_Holder
 {
-    Texture_Manager textureManager;
-    Font_Manager    fontManager;
+    Texture_Manager textures;
+    Font_Manager    fonts;
 };
 
 #endif // RESOURCEMANAGER_H_INCLUDED
