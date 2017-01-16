@@ -1,0 +1,9 @@
+*.layout
+*.depend
+#*.cbp
+
+
+bin/
+obj/
+
+*.dll
