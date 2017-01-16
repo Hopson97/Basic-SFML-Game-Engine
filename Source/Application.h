@@ -10,8 +10,9 @@
 //Cheeky defines to avoid longlineitus
 #define GET_RES m_p_application->getResources()
 
-#define GET_APP_TEXTURE(id) GET_RES.textures.  get(id)
-#define GET_APP_FONT(id)    GET_RES.fonts.     get(id)
+#define GET_APP_TEXTURE(id) GET_RES.textures.   get(id)
+#define GET_APP_FONT(id)    GET_RES.fonts.      get(id)
+#define GET_APP_SOUND(id)   GET_RES.sounds.     get(id)
 
 class Application
 {

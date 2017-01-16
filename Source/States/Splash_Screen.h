@@ -2,7 +2,10 @@
 #define SPLASH_SCREEN_H_INCLUDED
 
 #include <stack>
+#include <memory>
+
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include "State_Base.h"
 
@@ -15,6 +18,7 @@ namespace State
         {
             public:
                 Splash(float time, const sf::Texture& splash);
+                Splash(float time, const sf::Texture& splash, const sf::SoundBuffer& sound);
 
                 void start();
                 void draw();
@@ -24,6 +28,7 @@ namespace State
                 float               m_time;
                 sf::RectangleShape  m_sprite;
                 sf::Clock           m_clock;
+                std::unique_ptr<sf::Sound> m_sound;
         };
 
         enum class Splash_State

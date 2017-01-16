@@ -13,8 +13,22 @@ namespace State
         m_sprite.setTexture(&splash);
     }
 
+
+    Splash_Screen::Splash::Splash(float time, const sf::Texture& splash, const sf::SoundBuffer& sound)
+    :   m_time (time)
+    {
+        m_sprite.setSize({Display::WIDTH, Display::HEIGHT});
+        m_sprite.setTexture(&splash);
+
+        m_sound = std::make_unique<sf::Sound>(sound);
+    }
+
     void Splash_Screen::Splash::start()
     {
+        if (m_sound)
+        {
+            m_sound->play();
+        }
         m_clock.restart();
     }
 
@@ -36,7 +50,8 @@ namespace State
         m_fadeSprite.setFillColor({0, 0, 0,255});
         m_fadeSprite.setSize({Display::WIDTH, Display::HEIGHT});
 
-        m_splashes.push({3, GET_APP_TEXTURE(Texture_ID::Splash_SFML)});
+        m_splashes.push({1.5, GET_APP_TEXTURE(Texture_ID::Splash_SFML)});
+        m_splashes.push({1.5, GET_APP_TEXTURE(Texture_ID::Splash_MH), GET_APP_SOUND(Sound_ID::Splash_Made_By)});
     }
 
     void Splash_Screen::input(const sf::Event& e)
