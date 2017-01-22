@@ -1,31 +1,26 @@
 #include "Random.h"
 
-#include <cstdlib>
+#include <random>
 #include <ctime>
-#include <cmath>
 
 namespace Random
 {
+    std::minstd_rand gen;
 
     void init()
     {
-        srand(time(nullptr));
+        gen.seed(std::time(nullptr));
     }
 
-	int integer(int low, int high)
-	{
-		return rand() % (high - low + 1) + low;
-	}
+    int intInRange(int low, int high)
+    {
+        std::uniform_int_distribution<int> dist(low, high);
+        return dist(gen);
+    }
 
-	double decimal(double low, double high, int precision)
-	{
-		auto multiplier = pow(10, precision);
-
-		low *= multiplier;
-		high *= multiplier;
-
-		auto newNum = integer(low, high);
-
-		return newNum / multiplier;
-	}
+    float floatInRange (float low, float high)
+    {
+        std::uniform_real_distribution<float> dist(low, high);
+        return dist(gen);
+    }
 }
