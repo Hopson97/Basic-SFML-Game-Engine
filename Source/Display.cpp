@@ -1,48 +1,57 @@
 #include "Display.h"
 
-#include <memory>
+#include "States/State_Base.h"
 
 namespace Display
 {
-    std::unique_ptr<sf::RenderWindow> d_window;
+    namespace
+    {
+        sf::RenderWindow window;
+
+        void checkForClose(const sf::Event& e)
+        {
+            if (e.type == sf::Event::Closed)
+            {
+                window.close();
+            }
+        }
+    }
 
     void init(const std::string& name)
     {
-        d_window = std::make_unique<sf::RenderWindow>(sf::VideoMode{WIDTH, HEIGHT},
-                                                      name,
-                                                      sf::Style::Close);
+        window.create({WIDTH, HEIGHT},
+                       name,
+                       sf::Style::Close);
     }
 
     bool isOpen()
     {
-        return d_window->isOpen();
-    }
-
-    sf::Event checkEvents()
-    {
-        sf::Event e;
-        while (d_window->pollEvent(e))
-        {
-            if (e.type == sf::Event::Closed)
-            {
-                d_window->close();
-            }
-        }
-        return e;
+        return window.isOpen();
     }
 
     void update()
     {
-        d_window->display();
+        window.display();
     }
 
     void clear (const sf::Color& colour)
     {
-        d_window->clear(colour);
+        window.clear(colour);
     }
 
     void draw(const sf::Drawable& drawable)
     {
-        d_window->draw(drawable);
+        window.draw(drawable);
     }
+
+    void pollEvents(State::State_Base& gameState)
+    {
+        sf::Event e;
+        while (window.pollEvent(e))
+        {
+            gameState.input(e);
+            checkForClose(e);
+        }
+    }
+
 }

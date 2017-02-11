@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../Resource_Manager.h"
+#include "../Resource_Managers/Resource_Holder.h"
 
 class Application;
 

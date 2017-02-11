@@ -5,8 +5,8 @@ namespace Random
 {
     void init();
 
-    int intInRange(int low, int high);
-    float floatInRange (float low, float high);
+    int integer (int low, int high);
+    double decimal(double low, double high, int precision);
 }
 
 #endif // RANDOM_H_INCLUDED

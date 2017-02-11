@@ -43,17 +43,17 @@ void Application::runMainLoop()
     while (Display::isOpen())
     {
         auto dt = c.restart().asSeconds();
-        auto event = Display::checkEvents();
 
         Display::clear();
 
-        m_states.top()->input   (event);
         m_states.top()->input   ();
         m_states.top()->update  (dt);
         m_states.top()->draw    ();
 
         Display::update         ();
         calculateFPS            ();
+
+        Display::pollEvents(*m_states.top());
     }
 }
 

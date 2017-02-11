@@ -4,7 +4,7 @@
 #include <memory>
 #include <stack>
 
-#include "Resource_Manager.h"
+#include "Resource_Managers/Resource_Holder.h"
 #include "States/State_Base.h"
 
 class Application
